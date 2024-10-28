@@ -1,3 +1,4 @@
+```json
 {
   "companyName": "AltinBot Corp",
   "welcomeMessage": "Welcome to AltinBot! How can I assist you today?",
@@ -216,3 +217,4 @@
     }
   ]
 }
+```
