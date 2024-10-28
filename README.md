@@ -12,7 +12,7 @@ conversational bot with pre-defined responses, customizable styles, and dynamic 
 
 ## Installation
 
-Install AltinBot via npm:
+Install Altin-Bot via npm:
 
 ```bash
 npm install altin-bot
@@ -25,7 +25,7 @@ npm install altin-bot
 
    ```javascript
    import { createApp } from 'vue';
-   import AltinBot from 'altinbot';
+   import AltinBot from 'altin-bot';
    import 'altinbot/dist/style.css';
 
    const app = createApp(App);
@@ -145,7 +145,8 @@ Here's a quick demo of AltinBot in action:
 
 ## Customization
 
-AltinBot is fully customizable through JSON. You can update the theme, interaction flow, and responses without modifying
+Altin-Bot is fully customizable through JSON. You can update the theme, interaction flow, and responses without
+modifying
 code. Define your configuration in the JSON file and pass it as a prop.
 
 ## Contributing

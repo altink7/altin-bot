@@ -1,9 +1,11 @@
 {
   "name": "altin-bot",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A customizable chatbot component for Vue.js applications",
+  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist",
     "README.md"
@@ -25,13 +27,16 @@
     "vue": "^3.0.0"
   },
   "dependencies": {
-    "vue": "^3.5.12"
+    "vue": "^3.0.0"
   },
   "devDependencies": {
+    "@types/node": "^22.8.1",
     "@vitejs/plugin-vue": "^5.1.4",
+    "path": "^0.12.7",
     "sass-embedded": "^1.80.4",
     "typescript": "~5.6.2",
     "vite": "^5.4.9",
+    "vite-plugin-dts": "^4.3.0",
     "vue-tsc": "^2.1.6"
   }
 }
