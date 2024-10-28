@@ -1,7 +1,7 @@
-
 # AltinBot
 
-**AltinBot** is a customizable chatbot component for Vue.js applications. It allows developers to integrate a conversational bot with pre-defined responses, customizable styles, and dynamic options via JSON configuration.
+**AltinBot** is a customizable chatbot component for Vue.js applications. It allows developers to integrate a
+conversational bot with pre-defined responses, customizable styles, and dynamic options via JSON configuration.
 
 ## Features
 
@@ -15,13 +15,13 @@
 Install AltinBot via npm:
 
 ```bash
-npm install altinbot
+npm install altin-bot
 ```
 
 ## Usage
 
 1. **Register the Component**:
-   - Import and register `AltinBot` in your Vue component.
+    - Import and register `AltinBot` in your Vue component.
 
    ```javascript
    import { createApp } from 'vue';
@@ -34,7 +34,7 @@ npm install altinbot
    ```
 
 2. **Import and Use in a Component**:
-   - Use the `altinbot` component in your Vue app:
+    - Use the `altin-bot` component in your Vue app:
 
    ```vue
    <template>
@@ -44,7 +44,7 @@ npm install altinbot
    </template>
 
    <script>
-   import AltinBot from 'altinbot';
+   import AltinBot from 'altin-bot';
    import botConfig from './config/altinbot-config.json';
 
    export default {
@@ -61,7 +61,8 @@ npm install altinbot
    ```
 
 3. **Configuration File**:
-   - Create a configuration file (`altinbot-config.json`) in your project. Define the chatbot's responses, interaction flow, and UI settings.
+    - Create a configuration file (`altinbot-config.json`) in your project. Define the chatbot's responses, interaction
+      flow, and UI settings.
 
    ```json
    {
@@ -101,7 +102,7 @@ npm install altinbot
 - `companyName`: The bot’s display name.
 - `welcomeMessage`: Initial greeting message.
 - `theme`: Object containing UI settings like colors, font, and border radius.
-  - `primaryColor`, `secondaryColor`, `userOptionColor`, `botOptionColor`, etc.
+    - `primaryColor`, `secondaryColor`, `userOptionColor`, `botOptionColor`, etc.
 - `chatOptions`: Controls chat settings, including sound, message delay, and scrolling behavior.
 - `botInteractions`: Array of interactions for the decision tree.
 
@@ -110,40 +111,42 @@ npm install altinbot
 Here's a quick demo of AltinBot in action:
 
 ```vue
+
 <template>
   <div id="app">
-    <altin-bot :config="botConfig" />
+    <altin-bot :config="botConfig"/>
   </div>
 </template>
 
 <script>
-import AltinBot from 'altinbot';
-import botConfig from './bot-config.json';
+  import AltinBot from 'altin-bot';
+  import botConfig from './bot-config.json';
 
-export default {
-  components: {
-    AltinBot
-  },
-  data() {
-    return {
-      botConfig
-    };
-  }
-};
+  export default {
+    components: {
+      AltinBot
+    },
+    data() {
+      return {
+        botConfig
+      };
+    }
+  };
 </script>
 
 <style>
-#app {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  color: #333;
-}
+  #app {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #333;
+  }
 </style>
 ```
 
 ## Customization
 
-AltinBot is fully customizable through JSON. You can update the theme, interaction flow, and responses without modifying code. Define your configuration in the JSON file and pass it as a prop.
+AltinBot is fully customizable through JSON. You can update the theme, interaction flow, and responses without modifying
+code. Define your configuration in the JSON file and pass it as a prop.
 
 ## Contributing
 
