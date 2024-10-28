@@ -1,5 +1,5 @@
 {
-  "companyName": "Corp",
+  "companyName": "AltinBot Corp",
   "welcomeMessage": "Welcome to AltinBot! How can I assist you today?",
   "theme": {
     "primaryColor": "#007bff",
@@ -55,11 +55,13 @@
       "options": [
         {
           "label": "Can't log in",
-          "response": "You can reset your password [here](https://example.com/reset-password)."
+          "response": "You can reset your password [here](https://example.com/reset-password).",
+          "nextId": 12
         },
         {
           "label": "App is crashing",
-          "response": "Please try reinstalling the app or check our support page [here](https://example.com/support)."
+          "response": "Please try reinstalling the app or check our support page [here](https://example.com/support).",
+          "nextId": 12
         }
       ]
     },
@@ -69,11 +71,13 @@
       "options": [
         {
           "label": "View transaction history",
-          "response": "You can view your transaction history [here](https://example.com/transactions)."
+          "response": "You can view your transaction history [here](https://example.com/transactions).",
+          "nextId": 12
         },
         {
           "label": "Incorrect charge",
-          "response": "Please contact billing support [here](https://example.com/contact-billing)."
+          "response": "Please contact billing support [here](https://example.com/contact-billing).",
+          "nextId": 12
         }
       ]
     },
@@ -101,11 +105,13 @@
       "options": [
         {
           "label": "View features",
-          "response": "You can explore Product A features [here](https://example.com/product-a-features)."
+          "response": "You can explore Product A features [here](https://example.com/product-a-features).",
+          "nextId": 12
         },
         {
           "label": "Read reviews",
-          "response": "See what others are saying [here](https://example.com/product-a-reviews)."
+          "response": "See what others are saying [here](https://example.com/product-a-reviews).",
+          "nextId": 12
         }
       ]
     },
@@ -115,11 +121,13 @@
       "options": [
         {
           "label": "View features",
-          "response": "You can explore Product B features [here](https://example.com/product-b-features)."
+          "response": "You can explore Product B features [here](https://example.com/product-b-features).",
+          "nextId": 12
         },
         {
           "label": "View pricing",
-          "response": "Check out pricing options [here](https://example.com/product-b-pricing)."
+          "response": "Check out pricing options [here](https://example.com/product-b-pricing).",
+          "nextId": 12
         }
       ]
     },
@@ -129,11 +137,13 @@
       "options": [
         {
           "label": "Learn features",
-          "response": "Discover Product C features [here](https://example.com/product-c-features)."
+          "response": "Discover Product C features [here](https://example.com/product-c-features).",
+          "nextId": 12
         },
         {
           "label": "Request a demo",
-          "response": "Schedule a demo [here](https://example.com/request-demo)."
+          "response": "Schedule a demo [here](https://example.com/request-demo).",
+          "nextId": 12
         }
       ]
     },
@@ -143,7 +153,8 @@
       "options": [
         {
           "label": "Update payment method",
-          "response": "Update your payment method [here](https://example.com/update-payment)."
+          "response": "Update your payment method [here](https://example.com/update-payment).",
+          "nextId": 12
         },
         {
           "label": "Cancel subscription",
@@ -157,11 +168,13 @@
       "options": [
         {
           "label": "Yes, cancel",
-          "response": "You can complete cancellation [here](https://example.com/cancel-subscription)."
+          "response": "You can complete cancellation [here](https://example.com/cancel-subscription).",
+          "nextId": 12
         },
         {
           "label": "No, keep it",
-          "response": "Glad to keep you with us!"
+          "response": "Glad to keep you with us!",
+          "nextId": 12
         }
       ]
     },
@@ -170,11 +183,11 @@
       "question": "Was this information helpful?",
       "options": [
         {
-          "label": "Yes",
+          "label": "I am done",
           "response": "Thank you! Happy to help."
         },
         {
-          "label": "No",
+          "label": "Start again",
           "nextId": 13
         }
       ]
