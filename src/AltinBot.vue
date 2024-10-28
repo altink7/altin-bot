@@ -1,99 +1,87 @@
 <template>
   <div>
-    <button v-show="!isChatOpen" @click="toggleChat" class="open-chat-button">Open Chat</button>
-    <div v-show="isChatOpen" class="chat-window">
-      <div class="chat-header" @click="toggleChat">AltinBot</div>
+    <ButtonAtom v-show="!isChatOpen" @click="toggleChat" :theme="theme">Open Chat</ButtonAtom>
+    <div v-show="isChatOpen" class="chat-window" :style="{ fontFamily: theme.fontFamily }">
+      <ChatHeader :theme="theme" @toggle="toggleChat">{{ config.companyName }} Bot</ChatHeader>
+
       <div class="chat-messages">
-        <div v-for="message in messages" :key="message.id" :class="['message', message.type]">
-          {{ message.text }}
+        <MessageList :messages="messages" :theme="theme"/>
+
+        <!-- Typing Indicator -->
+        <div v-if="isTyping" class="typing-indicator">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
         </div>
+
+        <!-- Options List -->
+        <OptionList v-if="currentInteraction" :options="currentInteraction.options" @select="handleOptionSelect"
+                    :theme="theme"/>
       </div>
-      <input v-model="userInput" @keyup.enter="handleUserInput" placeholder="Type your message..."/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue';
+import {defineProps, ref} from 'vue';
+import ChatHeader from "./components/atom/ChatHeader.vue";
+import MessageList from "./components/atom/MessageList.vue";
+import ButtonAtom from "./components/atom/ButtonAtom.vue";
+import {AltinBotConfig} from "./service/AltinBotConfig.ts";
+import './assets/css/main.css';
+import OptionList from "./components/atom/OptionList.vue";
+
+const props = defineProps<{ config: AltinBotConfig }>();
+const config = props.config;
+
+if (!config.validate()) {
+  console.error("Invalid AltinBot configuration.");
+}
 
 const isChatOpen = ref(false);
-const messages = ref<Array<{ id: number, text: string, type: string }>>([]);
-const userInput = ref('');
+const isTyping = ref(false);
+const messages = ref([{id: 0, text: config.welcomeMessage, type: 'bot', timestamp: new Date().toLocaleTimeString()}]);
+const theme = config.theme;
+const currentInteraction = ref(config.botInteractions[0]);
 
 const toggleChat = () => {
   isChatOpen.value = !isChatOpen.value;
-  if (isChatOpen.value && messages.value.length === 0) {
-    messages.value.push({id: messages.value.length, text: 'Hello, how can I help you today?', type: 'bot'});
-  }
 };
 
-const handleUserInput = () => {
-  if (userInput.value.trim()) {
-    messages.value.push({id: messages.value.length, text: userInput.value, type: 'user'});
-    userInput.value = '';
+const showTypingIndicator = (callback) => {
+  isTyping.value = true;
+  setTimeout(() => {
+    isTyping.value = false;
+    callback();
+  }, config.chatOptions.messageDelay);
+};
+
+const handleOptionSelect = (option) => {
+  messages.value.push({
+    id: messages.value.length,
+    text: option.label,
+    type: 'user',
+    timestamp: new Date().toLocaleTimeString()
+  });
+
+  if (option.response) {
+    showTypingIndicator(() => {
+      messages.value.push({
+        id: messages.value.length,
+        text: option.response,
+        type: 'bot',
+        timestamp: new Date().toLocaleTimeString()
+      });
+      if (option.nextId) currentInteraction.value = config.botInteractions.find(interaction => interaction.id === option.nextId);
+    });
+  } else if (option.nextId) {
+    currentInteraction.value = config.botInteractions.find(interaction => interaction.id === option.nextId);
+    showTypingIndicator(() => {
+      messages.value.push({
+        id: messages.value.length,
+        text: currentInteraction.value?.question || '',
+        type: 'bot',
+        timestamp: new Date().toLocaleTimeString()
+      });
+    });
   }
 };
 </script>
-
-<style scoped>
-.open-chat-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.chat-window {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 300px;
-  max-height: 400px;
-  border: 1px solid #747373;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-}
-
-.chat-header {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.chat-messages {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-}
-
-.message.bot {
-  background-color: #403e3e;
-  padding: 5px;
-  margin: 5px 0;
-  border-radius: 5px;
-}
-
-.message.user {
-  background-color: #c1b9b9;
-  color: #2a1212;
-  padding: 5px;
-  margin: 5px 0;
-  align-self: flex-end;
-  border-radius: 5px;
-}
-
-input {
-  background-color: #c1b9b9;
-  color: #2a1212;
-  padding: 10px;
-  border: none;
-  border-top: 1px solid #050505;
-}
-</style>

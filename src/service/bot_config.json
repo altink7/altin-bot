@@ -1,0 +1,205 @@
+{
+  "companyName": "Corp",
+  "welcomeMessage": "Welcome to AltinBot! How can I assist you today?",
+  "theme": {
+    "primaryColor": "#007bff",
+    "secondaryColor": "#403e3e",
+    "userOptionColor": "#c1b9b9",
+    "botOptionColor": "#5c5c5c",
+    "fontFamily": "Arial, sans-serif",
+    "borderRadius": "10px",
+    "headerBackground": "#007bff",
+    "headerTextColor": "#ffffff"
+  },
+  "chatOptions": {
+    "enableSound": true,
+    "messageDelay": 800,
+    "autoScroll": true
+  },
+  "botInteractions": [
+    {
+      "id": 1,
+      "question": "How can I help you today?",
+      "options": [
+        {
+          "label": "I need help",
+          "nextId": 2
+        },
+        {
+          "label": "I have a question about products",
+          "nextId": 5
+        },
+        {
+          "label": "I want to manage my subscription",
+          "nextId": 10
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "What kind of help do you need?",
+      "options": [
+        {
+          "label": "Technical Support",
+          "nextId": 3
+        },
+        {
+          "label": "Billing Issues",
+          "nextId": 4
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "question": "Please select the issue:",
+      "options": [
+        {
+          "label": "Can't log in",
+          "response": "You can reset your password [here](https://example.com/reset-password)."
+        },
+        {
+          "label": "App is crashing",
+          "response": "Please try reinstalling the app or check our support page [here](https://example.com/support)."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "question": "Please select a billing issue:",
+      "options": [
+        {
+          "label": "View transaction history",
+          "response": "You can view your transaction history [here](https://example.com/transactions)."
+        },
+        {
+          "label": "Incorrect charge",
+          "response": "Please contact billing support [here](https://example.com/contact-billing)."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "question": "Which product are you interested in?",
+      "options": [
+        {
+          "label": "Product A",
+          "nextId": 6
+        },
+        {
+          "label": "Product B",
+          "nextId": 7
+        },
+        {
+          "label": "Product C",
+          "nextId": 8
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "question": "Product A is designed for advanced users. Would you like to see the features or reviews?",
+      "options": [
+        {
+          "label": "View features",
+          "response": "You can explore Product A features [here](https://example.com/product-a-features)."
+        },
+        {
+          "label": "Read reviews",
+          "response": "See what others are saying [here](https://example.com/product-a-reviews)."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "question": "Product B offers unique benefits. Would you like to see the features or pricing?",
+      "options": [
+        {
+          "label": "View features",
+          "response": "You can explore Product B features [here](https://example.com/product-b-features)."
+        },
+        {
+          "label": "View pricing",
+          "response": "Check out pricing options [here](https://example.com/product-b-pricing)."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "question": "Product C is popular with small businesses. Would you like to learn about features or request a demo?",
+      "options": [
+        {
+          "label": "Learn features",
+          "response": "Discover Product C features [here](https://example.com/product-c-features)."
+        },
+        {
+          "label": "Request a demo",
+          "response": "Schedule a demo [here](https://example.com/request-demo)."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "question": "Subscription Management: What would you like to do?",
+      "options": [
+        {
+          "label": "Update payment method",
+          "response": "Update your payment method [here](https://example.com/update-payment)."
+        },
+        {
+          "label": "Cancel subscription",
+          "nextId": 11
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "question": "Are you sure you want to cancel your subscription?",
+      "options": [
+        {
+          "label": "Yes, cancel",
+          "response": "You can complete cancellation [here](https://example.com/cancel-subscription)."
+        },
+        {
+          "label": "No, keep it",
+          "response": "Glad to keep you with us!"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "question": "Was this information helpful?",
+      "options": [
+        {
+          "label": "Yes",
+          "response": "Thank you! Happy to help."
+        },
+        {
+          "label": "No",
+          "nextId": 13
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "question": "What do you need help with?",
+      "options": [
+        {
+          "label": "Technical support",
+          "nextId": 3
+        },
+        {
+          "label": "Billing",
+          "nextId": 4
+        },
+        {
+          "label": "Product information",
+          "nextId": 5
+        },
+        {
+          "label": "Subscription",
+          "nextId": 10
+        }
+      ]
+    }
+  ]
+}

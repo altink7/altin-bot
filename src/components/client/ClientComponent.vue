@@ -9,14 +9,19 @@
     Simulates the Client App which is using our Library
   </h2>
 
-  <AltinBot/>
+  <AltinBot :config="botConfig"/>
 </template>
 
 <script setup lang="ts">
 import {ref} from 'vue'
-import AltinBot from "../AltinBot.vue";
+import AltinBot from "../../AltinBot.vue";
+import config from "../../service/bot_config.json";
+import {AltinBotConfig} from "../../service/AltinBotConfig.ts";
+
+const botConfig = new AltinBotConfig(config);
 
 defineProps<{ msg: string }>()
+
 
 const count = ref(0)
 </script>
