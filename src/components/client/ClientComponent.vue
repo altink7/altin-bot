@@ -14,9 +14,9 @@
 
 <script setup lang="ts">
 import {ref} from 'vue'
-import AltinBot from "../../AltinBot.vue";
+import {AltinBotConfig} from "../../service/AltinBotConfig.js";
 import config from "../../service/bot_config.json";
-import {AltinBotConfig} from "../../service/AltinBotConfig.ts";
+import AltinBot from "../AltinBot.vue";
 
 const botConfig = new AltinBotConfig(config);
 

@@ -1,4 +1,4 @@
-interface ThemeConfig {
+export interface ThemeConfig {
     primaryColor: string;
     secondaryColor: string;
     userOptionColor: string;
@@ -10,22 +10,29 @@ interface ThemeConfig {
 }
 
 
-interface ChatOptionsConfig {
+export interface ChatOptionsConfig {
     enableSound: boolean;
     messageDelay: number;
     autoScroll: boolean;
 }
 
-interface BotOption {
+export interface BotOption {
     label: string;
     response?: string;
     nextId?: number;
 }
 
-interface BotInteraction {
+export interface BotInteraction {
     id: number;
     question: string;
     options: BotOption[];
+}
+
+export interface Message {
+    id: number;
+    text: string | null;
+    type: 'bot' | 'user';
+    timestamp: string;
 }
 
 export class AltinBotConfig {

@@ -1,12 +1,28 @@
 {
   "name": "altin-bot",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "1.0.0",
+  "description": "A customizable chatbot component for Vue.js applications",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview"
+  },
+  "keywords": [
+    "chatbot",
+    "vue",
+    "customizable",
+    "UI"
+  ],
+  "author": "Altin Kelmendi",
+  "license": "MIT",
+  "peerDependencies": {
+    "vue": "^3.0.0"
   },
   "dependencies": {
     "vue": "^3.5.12"

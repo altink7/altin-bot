@@ -28,12 +28,13 @@
 
 <script setup lang="ts">
 import {defineProps, ref, watch} from 'vue';
-import ChatHeader from "./components/atom/ChatHeader.vue";
-import MessageList from "./components/atom/MessageList.vue";
-import ButtonAtom from "./components/atom/ButtonAtom.vue";
-import OptionList from "./components/atom/OptionList.vue";
-import {AltinBotConfig} from "./service/AltinBotConfig.ts";
-import './assets/css/main.css';
+import {AltinBotConfig, BotInteraction, Message} from "../service/AltinBotConfig.ts";
+import '../assets/css/main.css';
+import OptionList from "./atom/OptionList.vue";
+import MessageList from "./atom/MessageList.vue";
+import ChatHeader from "./atom/ChatHeader.vue";
+import ButtonAtom from "./atom/ButtonAtom.vue";
+
 
 const props = defineProps<{ config: AltinBotConfig }>();
 const config = props.config;
@@ -44,14 +45,20 @@ if (!config.validate()) {
 
 const isChatOpen = ref(false);
 const isTyping = ref(false);
-const messages = ref([{id: 0, text: config.welcomeMessage, type: 'bot', timestamp: new Date().toLocaleTimeString()}]);
-const historyMessages = ref([]); // Stores resolved chats
+const messages = ref<Message[]>([
+  {
+    id: 0,
+    text: config.welcomeMessage ?? "Hello! How can I help you today?",
+    type: 'bot',
+    timestamp: new Date().toLocaleTimeString()
+  },
+]);
+const historyMessages = ref<Message[]>([]);
 const theme = config.theme;
-const currentInteraction = ref(config.botInteractions[0]);
+const currentInteraction = ref<BotInteraction | undefined>(config.botInteractions[0]);
 const showSuccessAnimation = ref(false);
 const chatResolved = ref(false);
 const isRestarted = ref(false);
-let previousQuestion = null;
 
 const toggleChat = () => {
   isChatOpen.value = !isChatOpen.value;
@@ -60,8 +67,7 @@ const toggleChat = () => {
   }
 };
 
-
-const showTypingIndicator = (callback) => {
+const showTypingIndicator = (callback: () => void) => {
   isTyping.value = true;
   setTimeout(() => {
     isTyping.value = false;
@@ -69,24 +75,27 @@ const showTypingIndicator = (callback) => {
   }, config.chatOptions.messageDelay);
 };
 
-const handleOptionSelect = (option) => {
+const handleOptionSelect = (option: { label: string; response?: string; nextId?: number }) => {
   messages.value.push({
     id: messages.value.length,
     text: option.label,
     type: 'user',
-    timestamp: new Date().toLocaleTimeString()
+    timestamp: new Date().toLocaleTimeString(),
   });
 
   if (option.response) {
     showTypingIndicator(() => {
       messages.value.push({
         id: messages.value.length,
-        text: option.response,
+        text: option.response ?? "I'm sorry, I didn't get that.",
         type: 'bot',
-        timestamp: new Date().toLocaleTimeString()
+        timestamp: new Date().toLocaleTimeString(),
       });
-      previousQuestion = option.response;
-      if (option.nextId) currentInteraction.value = config.botInteractions.find(interaction => interaction.id === option.nextId);
+      if (option.nextId) {
+        currentInteraction.value = config.botInteractions.find(
+            (interaction) => interaction.id === option.nextId
+        );
+      }
     });
   } else if (option.nextId === 12 && option.label === "Yes") {
     showSuccessAnimation.value = true;
@@ -96,16 +105,17 @@ const handleOptionSelect = (option) => {
       closeChat();
     }, 2000);
   } else if (option.nextId) {
-    currentInteraction.value = config.botInteractions.find(interaction => interaction.id === option.nextId);
+    currentInteraction.value = config.botInteractions.find(
+        (interaction) => interaction.id === option.nextId
+    );
     showTypingIndicator(() => {
       const nextQuestion = currentInteraction.value?.question || '';
       messages.value.push({
         id: messages.value.length,
         text: nextQuestion,
         type: 'bot',
-        timestamp: new Date().toLocaleTimeString()
+        timestamp: new Date().toLocaleTimeString(),
       });
-      previousQuestion = nextQuestion;
     });
   }
 };
@@ -122,7 +132,8 @@ watch(isChatOpen, (newVal) => {
   if (newVal && chatResolved.value && isRestarted.value) {
     messages.value = [{id: 0, text: config.welcomeMessage, type: 'bot', timestamp: new Date().toLocaleTimeString()}];
     currentInteraction.value = config.botInteractions[0];
-    chatResolved.value = false; // Start over after showing history
+    chatResolved.value = false;
   }
 });
+
 </script>
